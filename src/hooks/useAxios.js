@@ -15,7 +15,11 @@ const useAxios = url => {
     }
   };
 
-  return [response, getResponse, error];
+  const removeCards = () => {
+    setResponse([])
+  }
+
+  return [response, getResponse, error, removeCards];
 };
 
 export default useAxios;

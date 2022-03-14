@@ -8,7 +8,7 @@ import useAxios from "./hooks/useAxios";
  * Can also add a new card at random. */
 const BASE_URL = "https://deckofcardsapi.com/api/deck/new/draw/";
 function CardTable() {
-  const [cards, setCards, error] = useAxios(BASE_URL);
+  const [cards, setCards, error, removeCards] = useAxios(BASE_URL);
   const addCard = async () => {
     await setCards();
   };
@@ -22,6 +22,7 @@ function CardTable() {
       <h3>Pick a card, any card!</h3>
       <div>
         <button onClick={addCard}>Add a playing card!</button>
+        <button onClick={removeCards}>Remove all cards!</button>
       </div>
       <div className="PlayingCardList-card-area">
         {cards.map(cardData => (

@@ -11,10 +11,14 @@ import useAxios from "./hooks/useAxios";
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 function PokeDex() {
-  const [pokemon, setPokemon] = useAxios(BASE_URL);
+  const [pokemon, setPokemon, error, removeCards] = useAxios(BASE_URL);
   const addPokemon = async name => {
     setPokemon(name);
   };
+
+  if (error) {
+    <div>Oops! Something is wrong.</div>;
+  }
 
   const pokeCards = pokemon.map(cardData => {
     const { sprites, name, stats } = cardData.data;
@@ -34,13 +38,14 @@ function PokeDex() {
       />
     );
   });
-  
+
   return (
     <div className="PokeDex">
       <div className="PokeDex-buttons">
         <h3>Please select your pokemon:</h3>
         <PokemonSelect add={addPokemon} />
       </div>
+      <button onClick={removeCards}>Remove all cards!</button>
       <div className="PokeDex-card-area">{pokeCards}</div>
     </div>
   );
